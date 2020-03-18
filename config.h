@@ -16,6 +16,7 @@ static const char *colors[][3]      = {
         /*               fg         bg         border   */
         [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
         [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+        [SchemeHid]  = { col_cyan,  col_gray1, col_cyan  },
 };
 
 /* tagging */
@@ -29,13 +30,14 @@ static const Rule rules[] = {
         /* class      instance    title       tags mask     isfloating   monitor */
         /* Gimp2 doesn't need to float anymore. */
         /* { "Gimp",     NULL,       NULL,       0,            1,           -1 }, */
-        { "firefox",  NULL,       NULL,       1 << 1,       0,           -1 },
-        { "Emacs",    NULL,       NULL,       1 << 2,       0,           -1 },
-        { "Blender",  NULL,       NULL,       1 << 3,       0,           -1 },
-        { "Steam",    NULL,       NULL,       1 << 6,       0,           -1 },
-        { "Tilda",    NULL,       NULL,       0,            1,           -1 },
-        { "Thunar",   NULL,       NULL,       0,            1,           -1 },
-        { "Pavucontrol",   NULL,       NULL,  1 << 0,       1,           -1 },
+        { "firefox",       NULL,       NULL,       1 << 1,       0,           -1 },
+        { "Emacs",         NULL,       NULL,       1 << 2,       0,           -1 },
+        { "Blender",       NULL,       NULL,       1 << 3,       0,           -1 },
+        { "Steam",         NULL,       NULL,       1 << 6,       0,           -1 },
+        { "Tilda",         NULL,       NULL,       0,            1,           -1 },
+        { "Thunar",        NULL,       NULL,       ~0,           1,           -1 },
+        { "Mousepad",      NULL,       NULL,       ~0,           1,           -1 },
+        { "Pavucontrol",   NULL,       NULL,       1 << 0,       1,           -1 },
 };
 
 /* layout(s) */
@@ -70,7 +72,7 @@ static const char *thunarcmd[]  = { "thunar", NULL };
 
 static Key keys[] = {
         /* modifier                     key        function        argument */
-        { MODKEY,                       XK_x,      spawn,          {.v = dmenucmd } },
+        { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
         { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 
         { MODKEY|ShiftMask,             XK_t,      spawn,          {.v = thunarcmd } },
@@ -114,6 +116,7 @@ static Button buttons[] = {
         /* click                event mask      button          function        argument */
         { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
         { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+        { ClkWinTitle,          0,              Button1,        togglewin,      {0} },
         { ClkWinTitle,          0,              Button2,        zoom,           {0} },
         { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
         { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
