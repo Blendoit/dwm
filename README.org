@@ -3,8 +3,8 @@
 
 * Organisation
 
-- The =config.def.h= remains unchanged from the upstream dwm version, to make
-  patching easier.
+- Any patch for =config.def.h= is ignored, and the changes are instead directly
+  written to =config.h=.
 
 * Original README
 
