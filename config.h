@@ -5,7 +5,7 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Hermit-Regular:size=14" };
+static const char *fonts[]          = { "M+ 1m:size=14" };
 static const char dmenufont[]       = "Hermit-Regular:size=14";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -20,7 +20,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "Home", "Internet", "Code", "CAD", "Photo", "Music", "Gaming" };
+static const char *tags[] = { "1", "2", "3", "4" };
 
 static const Rule rules[] = {
         /* xprop(1):
@@ -30,11 +30,10 @@ static const Rule rules[] = {
         /* class      instance    title       tags mask     isfloating   monitor */
         /* Gimp2 doesn't need to float anymore. */
         /* { "Gimp",     NULL,       NULL,       0,            1,           -1 }, */
-        { "firefox",       NULL,       NULL,       1 << 1,       0,           -1 },
+        { "firefox",       NULL,       NULL,       1 << 0,       0,           -1 },
+        { "Blender",       NULL,       NULL,       1 << 1,       0,           -1 },
         { "Emacs",         NULL,       NULL,       1 << 2,       0,           -1 },
-        { "Blender",       NULL,       NULL,       1 << 3,       0,           -1 },
-        { "Steam",         NULL,       NULL,       1 << 6,       0,           -1 },
-        { "Tilda",         NULL,       NULL,       0,            1,           -1 },
+        { "Steam",         NULL,       NULL,       1 << 3,       0,           -1 },
         { "Thunar",        NULL,       NULL,       ~0,           1,           -1 },
         { "Mousepad",      NULL,       NULL,       ~0,           1,           -1 },
         { "Pavucontrol",   NULL,       NULL,       1 << 0,       1,           -1 },
