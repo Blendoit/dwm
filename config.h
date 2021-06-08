@@ -32,7 +32,7 @@ static const Rule rules[] = {
         /* { "Gimp",     NULL,       NULL,       0,            1,           -1 }, */
         { "firefox",       NULL,       NULL,       1 << 0,       0,           -1 },
         { "Blender",       NULL,       NULL,       1 << 1,       0,           -1 },
-        { "Emacs",         NULL,       NULL,       0,            1,           -1 },
+        { "Emacs",         NULL,       NULL,       0,            0,           -1 },
         { "st",            NULL,       NULL,       0,            1,           -1 },
         { "Steam",         NULL,       NULL,       1 << 3,       0,           -1 },
         { "Thunar",        NULL,       NULL,       0,            1,           -1 },
@@ -46,14 +46,14 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.60; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
         /* symbol     arrange function */
-        { "[M]",      monocle },
-        { "[]=",      tile },    /* first entry is default */
+        { "[]=",      tile },
+        { "[M]",      monocle }, /* first entry is default */
         { "><>",      NULL },    /* no layout function means floating behavior */
 };
 
@@ -76,8 +76,9 @@ static const char *termcmd[] = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 static const char *thunarcmd[] = { "thunar", NULL };
-static const char *editorcmd[] = { "emacsclient", "-a", "emacs", "-nc", "-s", "main", NULL };
+static const char *editorcmd[] = { "emacsclient", "-a", "emacs", "-nc", NULL };
 static const char *alsacmd[] = { "st", "-g", "15x30", "alsamixer", NULL };
+static const char *suspendcmd[] = { "systemctl", "suspend", NULL };
 
 static Key keys[] = {
         /* modifier                     key        function        argument */
@@ -88,6 +89,7 @@ static Key keys[] = {
         { MODKEY,                       XK_t,      spawn,          {.v = thunarcmd } },
         { MODKEY,                       XK_e,      spawn,          {.v = editorcmd } },
         { MODKEY,                       XK_s,      spawn,          {.v = alsacmd } },
+	{ MODKEY|ShiftMask,             XK_Delete, spawn,          {.v = suspendcmd } },
 
         { MODKEY,                       XK_b,      togglebar,      {0} },
         { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -98,7 +100,7 @@ static Key keys[] = {
         { MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
         { MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
         { MODKEY,                       XK_Tab,    view,           {0} },
-        { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+        { MODKEY,                       XK_q,      killclient,     {0} },
         { MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[1]} },
         { MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[2]} },
         { MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[0]} },
